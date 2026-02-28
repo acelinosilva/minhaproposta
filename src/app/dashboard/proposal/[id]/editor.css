@@ -1,0 +1,201 @@
+.proposal-view-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding-bottom: 5rem;
+}
+
+.editor-toolbar {
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    border-radius: var(--radius-md);
+}
+
+.toolbar-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+}
+
+/* Base Document Style */
+.proposal-content {
+    background: white;
+    color: #1e293b;
+    min-height: 1100px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    /* Remove default padding, use inner wrappers */
+}
+
+/* Override glass-card hover when used on the proposal paper */
+.proposal-content:hover {
+    background: white;
+    border-color: #cbd5e1;
+}
+
+/* Professional Header (Inside the paper) */
+.proposal-paper-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    padding: 4rem 3rem 2rem;
+    border-bottom: 2px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.header-left .brand-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header-left .brand-name::before {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border-radius: 3px;
+}
+
+.header-right {
+    text-align: right;
+}
+
+.header-right .doc-label {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.header-right .doc-date {
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.paper-info-bar {
+    padding: 1.5rem 3rem;
+    background: #fdfdfd;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    gap: 3rem;
+    font-size: 0.875rem;
+}
+
+.info-item .label {
+    display: block;
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    margin-bottom: 0.25rem;
+}
+
+.info-item .value {
+    color: #334155;
+    font-weight: 500;
+}
+
+/* Main Text Body */
+.paper-body {
+    padding: 3rem 4rem;
+}
+
+.markdown-preview {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.8;
+}
+
+/* Typography Enhancements */
+.markdown-preview h1,
+.markdown-preview h2,
+.markdown-preview h3 {
+    font-family: var(--font-display);
+    color: #0f172a;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    font-weight: 700;
+}
+
+.markdown-preview h1 {
+    font-size: 2.25rem;
+    background: linear-gradient(135deg, #0f172a, #334155);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #f1f5f9;
+}
+
+.markdown-preview h2 {
+    font-size: 1.5rem;
+    position: relative;
+    padding-left: 1rem;
+    border-left: 4px solid var(--color-primary);
+}
+
+.markdown-preview p {
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+}
+
+.markdown-preview ul,
+.markdown-preview ol {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+}
+
+.markdown-preview li {
+    margin-bottom: 0.75rem;
+    position: relative;
+}
+
+.markdown-preview strong {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.markdown-preview blockquote {
+    border-left: 4px solid #e2e8f0;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    color: #475569;
+    font-style: italic;
+}
+
+/* Textarea in Edit Mode */
+.content-textarea {
+    width: 100%;
+    height: 900px;
+    background: #f8fafc;
+    color: #0f172a;
+    border: 1px solid #cbd5e1;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    padding: 2.5rem;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* PDF Specific Tweaks override */
+@media print {
+    .proposal-content {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+}
