@@ -11,10 +11,11 @@ export const config = {
 };
 
 // Use the service role key to bypass RLS when updating the DB from the webhook
-const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY! // fallback for local dev if service role is missing
-);
+// Fallback for build time to avoid module evaluation errors
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder';
+
+const supabaseAdmin = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(req: NextRequest) {
     const body = await req.text();

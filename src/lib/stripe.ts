@@ -1,10 +1,12 @@
 import Stripe from 'stripe';
 
-if (!process.env.STRIPE_SECRET_KEY) {
-    throw new Error('STRIPE_SECRET_KEY is missing. Please set it in .env.local');
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || '';
+
+if (!STRIPE_SECRET_KEY && process.env.NODE_ENV === 'production') {
+    console.warn('⚠️ STRIPE_SECRET_KEY is missing. Stripe features will fail at runtime.');
 }
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+export const stripe = new Stripe(STRIPE_SECRET_KEY, {
     appInfo: {
         name: 'PropostaAI',
         version: '1.0.0',
