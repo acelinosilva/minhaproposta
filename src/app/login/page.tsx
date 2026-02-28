@@ -1,5 +1,11 @@
 import { login, signup } from './actions'
 import './login.css'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: "Entrar - Acesse seu Painel de Propostas",
+    description: "Faça login no PropostaAI para gerenciar seus documentos comerciais e acompanhar o status das suas negociações.",
+};
 
 export default async function LoginPage({
     searchParams,

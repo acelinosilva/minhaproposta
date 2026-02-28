@@ -4,8 +4,22 @@ import ViewTracker from './ViewTracker';
 import SignatureSection from './SignatureSection';
 import '@/app/dashboard/proposal/[id]/editor.css';
 import { Metadata } from 'next';
-
 import { createClient } from '@/utils/supabase/server';
+
+export async function generateMetadata({
+    params
+}: {
+    params: Promise<{ id: string }>
+}): Promise<Metadata> {
+    const { id } = await params;
+    const proposal = await getProposal(id);
+    if (!proposal) return { title: 'Proposta não encontrada' };
+
+    return {
+        title: `Proposta para ${proposal.client_name} - ${proposal.service_type}`,
+        description: `Confira a proposta comercial personalizada para ${proposal.client_name}. Gerado de forma profissional com PropostaAI.`,
+    };
+}
 
 async function getProposal(id: string) {
     try {

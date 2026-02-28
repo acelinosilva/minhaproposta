@@ -1,6 +1,13 @@
 import Link from 'next/link';
 import CheckoutButton from '@/components/CheckoutButton';
 import './landing.css';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Crie Propostas Comerciais com IA em Segundos",
+  description: "O PropostaAI é o primeiro gerador de propostas focado em conversão. Use inteligência artificial para criar documentos profissionais, rastrear aberturas e fechar mais vendas.",
+  keywords: ["gerador de propostas ia", "automação comercial", "proposta freelancer", "vendas b2b", "fechar negócios"],
+};
 
 const features = [
   {
@@ -98,6 +105,7 @@ export default function Home() {
             <Link href="#como-funciona" className="lp-nav__link">Como funciona</Link>
             <Link href="#pricing" className="lp-nav__link">Planos</Link>
             <Link href="#depoimentos" className="lp-nav__link">Clientes</Link>
+            <Link href="#faq" className="lp-nav__link">FAQ</Link>
           </div>
           <div className="lp-nav__actions">
             <Link href="/login" className="btn btn--ghost">Entrar</Link>
@@ -115,11 +123,10 @@ export default function Home() {
               Motor de Propostas com IA — v2.0
             </div>
             <h1 className="lp-hero__title anim-fade-up delay-1">
-              Feche mais negócios com propostas{' '}
-              <em>irrecusáveis.</em>
+              Feche mais negócios com um <em>gerador de propostas com IA.</em>
             </h1>
             <p className="lp-hero__sub anim-fade-up delay-2">
-              O único sistema que combina inteligência artificial com princípios de persuasão profissional para transformar seus dados em documentos comerciais que convertem.
+              O PropostaAI é a ferramenta definitiva que combina inteligência artificial avançada com princípios de persuasão para criar propostas comerciais que convertem leads em clientes.
             </p>
             <div className="lp-hero__cta anim-fade-up delay-3">
               <Link href="/login" className="btn btn--primary btn--large">
@@ -155,7 +162,7 @@ export default function Home() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/dashboard-preview.png"
-                  alt="PropostaAI — Painel de Gestão de Propostas"
+                  alt="Interface do PropostaAI — Ferramenta de automação de propostas comerciais e gestão de clientes"
                   className="lp-hero__dashboard-img"
                   width={1200}
                   height={675}
@@ -326,6 +333,37 @@ export default function Home() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── FAQ ── */}
+        <section id="faq" className="lp-section">
+          <div className="lp-container">
+            <span className="section-label">Dúvidas Frequentes</span>
+            <h2 className="section-title">Perguntas Comuns sobre o<br />Gerador de Propostas.</h2>
+            <div className="how-list" style={{ marginTop: '4rem' }}>
+              <div className="how-item">
+                <span className="how-item__num">?</span>
+                <div>
+                  <h3 className="how-item__title">Como a IA do PropostaAI cria as propostas?</h3>
+                  <p className="how-item__desc">Nossa IA analisa o contexto do seu projeto, o perfil do seu cliente e aplica modelos avançados de copywriting e persuasão comercial para gerar um documento personalizado e convincente.</p>
+                </div>
+              </div>
+              <div className="how-item">
+                <span className="how-item__num">?</span>
+                <div>
+                  <h3 className="how-item__title">As propostas são exportadas em que formato?</h3>
+                  <p className="how-item__desc">Todas as propostas podem ser exportadas instantaneamente em formato PDF de alta qualidade, pronto para impressão ou envio digital.</p>
+                </div>
+              </div>
+              <div className="how-item">
+                <span className="how-item__num">?</span>
+                <div>
+                  <h3 className="how-item__title">O PropostaAI é seguro para meus dados?</h3>
+                  <p className="how-item__desc">Sim. Seus dados são protegidos com criptografia de ponta a ponta e nunca utilizamos suas informações privadas para treinar modelos de IA públicos.</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>

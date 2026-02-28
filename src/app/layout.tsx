@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Space_Mono } from "next/font/google";
 import "./globals.css";
+import JsonLd from "@/components/JsonLd";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-geist-sans", // keep the CSS var name so globals.css still works
@@ -15,8 +16,29 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PropostaAI // Automação Comercial Inteligente",
-  description: "Crie propostas comerciais de alto impacto em segundos com IA.",
+  title: {
+    default: "PropostaAI // Automação Comercial Inteligente com IA",
+    template: "%s | PropostaAI"
+  },
+  description: "Crie propostas comerciais de alto impacto em segundos. Nossa IA ajuda freelancers e agências a transformarem orçamentos em documentos persuasivos.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://proposta-facil.vercel.app'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'PropostaAI // Automação Comercial Inteligente',
+    description: 'Crie propostas comerciais de alto impacto em segundos com IA.',
+    url: '/',
+    siteName: 'PropostaAI',
+    locale: 'pt_BR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'PropostaAI // Automação Comercial Inteligente',
+    description: 'Crie propostas comerciais de alto impacto em segundos com IA.',
+  },
+  keywords: ['proposta comercial', 'gerador de propostas', 'inteligência artificial', 'automação de vendas', 'freelancer', 'agência digital', 'copywriting'],
 };
 
 export default function RootLayout({
@@ -27,6 +49,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${spaceGrotesk.variable} ${spaceMono.variable}`}>
+        <JsonLd />
         {children}
       </body>
     </html>
