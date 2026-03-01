@@ -7,6 +7,8 @@ interface ShareProposalPanelProps {
     proposalId: string;
     viewCount: number;
     lastViewedAt: string | null;
+    timeSpent?: number;
+    feedbackCount?: number;
     clientName?: string;
     serviceType?: string;
 }
@@ -15,12 +17,33 @@ export default function ShareProposalPanel({
     proposalId,
     viewCount,
     lastViewedAt,
+    timeSpent = 0,
+    feedbackCount = 0,
     clientName = 'Cliente',
     serviceType = 'Serviços'
 }: ShareProposalPanelProps) {
     const [copied, setCopied] = useState(false);
+    const [generating, setGenerating] = useState(false);
+    const [followUps, setFollowUps] = useState<{ type: string, text: string }[]>([]);
 
     const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/p/${proposalId}` : '';
+
+    const handleGenerateFollowUp = async () => {
+        setGenerating(true);
+        try {
+            const res = await fetch('/api/ai/follow-up', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ proposalId })
+            });
+            const data = await res.json();
+            if (data.followUps) setFollowUps(data.followUps);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setGenerating(false);
+        }
+    };
 
     const handleCopy = async () => {
         try {
@@ -101,12 +124,74 @@ export default function ShareProposalPanel({
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                     <span style={{ fontSize: '0.75rem', color: 'var(--muted)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                        <Clock size={14} /> Último acesso
+                        <Clock size={14} /> Tempo total lido
                     </span>
                     <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>
-                        {lastViewedAt ? new Date(lastViewedAt).toLocaleString('pt-BR') : 'Nunca acessado'}
+                        {timeSpent > 0 ? `${Math.round(timeSpent / 60)} min` : '< 1 min'}
                     </span>
                 </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--muted)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                        <MessageCircle size={14} /> Comentários
+                    </span>
+                    <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>
+                        {feedbackCount || 0}
+                    </span>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--muted)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                        <ExternalLink size={14} /> Último acesso
+                    </span>
+                    <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>
+                        {lastViewedAt ? new Date(lastViewedAt).toLocaleDateString('pt-BR') : 'Nunca'}
+                    </span>
+                </div>
+            </div>
+
+            <div style={{ width: '100%', marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                    <div>
+                        <h4 style={{ fontSize: '0.9rem', fontWeight: 600, margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            ✨ Sugestões de Follow-up (IA)
+                        </h4>
+                        <p style={{ fontSize: '0.75rem', color: 'var(--muted)', margin: 0 }}>Baseado no comportamento do cliente na proposta.</p>
+                    </div>
+                    <button
+                        onClick={handleGenerateFollowUp}
+                        disabled={generating}
+                        className="btn-primary btn-sm"
+                        style={{ height: '32px', fontSize: '0.8rem' }}
+                    >
+                        {generating ? 'Analisando...' : 'Gerar Novas Sugestões'}
+                    </button>
+                </div>
+
+                {followUps.length > 0 && (
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem' }}>
+                        {followUps.map((f, idx) => (
+                            <div key={idx} className="glass-panel" style={{ padding: '1rem', background: 'rgba(255,255,255,0.02)' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+                                    <span style={{ fontSize: '0.7rem', fontWeight: 'bold', textTransform: 'uppercase', color: f.type === 'WhatsApp' ? '#22c55e' : 'var(--muted)' }}>
+                                        {f.type}
+                                    </span>
+                                    <button
+                                        onClick={() => {
+                                            navigator.clipboard.writeText(f.text);
+                                            alert('Copiado para o clipboard!');
+                                        }}
+                                        style={{ background: 'none', border: 'none', color: 'var(--muted)', cursor: 'pointer' }}
+                                        title="Copiar texto"
+                                    >
+                                        <Copy size={14} />
+                                    </button>
+                                </div>
+                                <p style={{ fontSize: '0.8rem', margin: 0, lineHeight: 1.4, color: 'var(--text-primary)' }}>{f.text}</p>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
 
         </div>

@@ -49,6 +49,8 @@ export default async function ProposalPage({
                 proposalId={proposal.id}
                 viewCount={proposal.view_count}
                 lastViewedAt={proposal.last_viewed_at}
+                timeSpent={proposal.total_time_spent}
+                feedbackCount={proposal.client_feedback?.length || 0}
                 clientName={proposal.client_name}
                 serviceType={proposal.service_type}
             />
