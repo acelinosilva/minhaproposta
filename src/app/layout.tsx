@@ -32,11 +32,20 @@ export const metadata: Metadata = {
     siteName: 'PropostaAI',
     locale: 'pt_BR',
     type: 'website',
+    images: [
+      {
+        url: '/dashboard-preview.png',
+        width: 1200,
+        height: 675,
+        alt: 'PropostaAI - Gerador de Propostas com IA',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'PropostaAI // Automação Comercial Inteligente',
     description: 'Crie propostas comerciais de alto impacto em segundos com IA.',
+    images: ['/dashboard-preview.png'],
   },
   keywords: ['proposta comercial', 'gerador de propostas', 'inteligência artificial', 'automação de vendas', 'freelancer', 'agência digital', 'copywriting'],
   verification: {
