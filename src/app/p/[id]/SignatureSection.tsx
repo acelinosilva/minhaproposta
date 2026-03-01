@@ -98,9 +98,13 @@ export default function SignatureSection({
         <div style={{ marginTop: '4rem', borderTop: '2px dashed var(--border)', paddingTop: '3rem' }}>
             <div style={{ maxWidth: '500px', margin: '0 auto', textAlign: 'center' }}>
                 <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Pronto para começarmos?</h3>
-                <p style={{ color: 'var(--muted)', marginBottom: '2rem' }}>
+                <p style={{ color: 'var(--muted)', marginBottom: '1.5rem' }}>
                     Ao clicar em aceitar, você concorda com os termos e o escopo descritos nesta proposta comercial.
                 </p>
+
+                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '1rem', borderRadius: '6px', fontSize: '0.8rem', color: 'var(--muted)', marginBottom: '2rem', textAlign: 'left', border: '1px solid var(--border)' }}>
+                    <strong>Validade Juridica do Aceite Digital:</strong> Esta proposta constitui um contrato comercial de prestação de serviços. O clique no botão abaixo confirma sua concordância e autorização imediata para o início dos trabalhos conforme cronograma.
+                </div>
 
                 {error && <div style={{ color: '#f87171', marginBottom: '1rem', fontSize: '0.9rem' }}>{error}</div>}
 

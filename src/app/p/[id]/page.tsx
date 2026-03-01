@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import ViewTracker from './ViewTracker';
 import SignatureSection from './SignatureSection';
+import FeedbackSection from './FeedbackSection';
 import '@/app/dashboard/proposal/[id]/editor.css';
 import { Metadata } from 'next';
 import { createClient } from '@/utils/supabase/server';
@@ -109,6 +110,11 @@ export default async function PublicProposalPage({
                         <ReactMarkdown>{proposal.content}</ReactMarkdown>
                     </div>
                 </div>
+
+                <FeedbackSection
+                    proposalId={id}
+                    accentColor={brandColor}
+                />
 
                 <SignatureSection
                     proposalId={id}

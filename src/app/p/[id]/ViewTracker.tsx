@@ -10,15 +10,20 @@ export default function ViewTracker({ proposalId }: { proposalId: string }) {
 
         hasTracked.current = true;
 
-        fetch(`/api/proposals/${proposalId}/view`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).catch(err => {
-            console.error('Failed to track view:', err);
-        });
-    }, [proposalId]);
+        useEffect(() => {
+            if (hasTracked.current) return;
+            hasTracked.current = true;
 
-    return null; // This component doesn't render anything
-}
+            // Initial view track
+            fetch(`/api/proposals/${proposalId}/view`, { method: 'POST' });
+
+            // Heartbeat every 30s to track time-on-page
+            const interval = setInterval(() => {
+                fetch(`/api/proposals/${proposalId}/heartbeat`, { method: 'POST' });
+            }, 30000);
+
+            return () => clearInterval(interval);
+        }, [proposalId]);
+
+        return null; // This component doesn't render anything
+    }
