@@ -39,6 +39,9 @@ export const metadata: Metadata = {
     description: 'Crie propostas comerciais de alto impacto em segundos com IA.',
   },
   keywords: ['proposta comercial', 'gerador de propostas', 'inteligência artificial', 'automação de vendas', 'freelancer', 'agência digital', 'copywriting'],
+  verification: {
+    google: 'ozQtHOPAWC45ktZNpYunFDoB8dn2ZNKoGE9poIdDU6g',
+  },
 };
 
 export default function RootLayout({
