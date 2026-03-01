@@ -7,6 +7,12 @@ import { createClient } from '@/utils/supabase/server'
 export async function login(formData: FormData) {
     const supabase = await createClient()
 
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL.includes('placeholder')) {
+        console.error('CRITICAL: Supabase URL missing in production')
+        return redirect('/login?error=Supabase URL not configured in Vercel')
+    }
+
+
     // type-casting here for convenience
     // in practice, you should validate your inputs
     const data = {
@@ -27,6 +33,11 @@ export async function login(formData: FormData) {
 
 export async function signup(formData: FormData) {
     const supabase = await createClient()
+
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL.includes('placeholder')) {
+        console.error('CRITICAL: Supabase URL missing in production')
+        return redirect('/login?error=Supabase URL not configured in Vercel')
+    }
 
     const data = {
         email: formData.get('email') as string,
