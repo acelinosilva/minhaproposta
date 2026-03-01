@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | PropostaAI"
   },
   description: "Crie propostas comerciais de alto impacto em segundos. Nossa IA ajuda freelancers e agências a transformarem orçamentos em documentos persuasivos.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://proposta-facil.vercel.app'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://minhaproposta-ecru.vercel.app'),
   alternates: {
     canonical: '/',
   },
